@@ -31,7 +31,6 @@ const SingleKeyCap = ({ letter }) => {
     checkWord(word)
       .unwrap()
       .then((data) => {
-        console.log("Success:", data);
         dispatch(updateGrid(data));
       })
       .catch((error) => {
@@ -46,9 +45,9 @@ const SingleKeyCap = ({ letter }) => {
         onClick={handleClick}
         className={`${
           letter === "Invio"
-            ? "lg:w-20 w-14 text-lg"
+            ? "lg:w-20 w-12 text-md"
             : letter === "⌫"
-            ? "lg:w-16 w-12  text-2xl"
+            ? "lg:w-16 w-10  text-2xl"
             : "lg:w-14 w-7 text-lg"
         } lg:h-14 md:h-12 h-10 flex items-center justify-center lg:m-2 m-1 rounded-md font-bold cursor-pointer uppercase shadow-md transition-colors duration-200 ${
           ["Invio", "⌫"].includes(letter)

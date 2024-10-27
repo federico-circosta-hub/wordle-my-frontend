@@ -28,7 +28,6 @@ const GameOverModal = () => {
   const [countdownTimer, setCountdownTimer] = useState<string>("");
   const [wordOfTheDay, setWordOfTheDay] = useState<string>("");
   const { data: encryptedWord } = useGetEncryptedWordQuery(undefined);
-  console.log("encryptedWord", encryptedWord);
 
   useEffect(() => {
     const timer = setInterval(() => updateCountdown(setCountdownTimer), 1000);

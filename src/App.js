@@ -4,7 +4,7 @@ import Header from "./components/Header";
 
 function App() {
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-between gap-4">
+    <div className="w-full h-screen flex flex-col items-center justify-around gap-4">
       <Header />
       <GameContainer />
       <Footer />

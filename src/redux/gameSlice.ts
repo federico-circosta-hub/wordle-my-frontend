@@ -13,9 +13,6 @@ const gameSlice = createSlice({
     statistics: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, "-1": 0 },
   },
   reducers: {
-    updateWordDate: (state, action) => {
-      state.wordDate = action.payload;
-    },
     setLetterInput: (state, action) => {
       const { letter } = action.payload;
       const newGrid = state.grid.map((row) => row.map((cell) => ({ ...cell })));
@@ -70,7 +67,8 @@ const gameSlice = createSlice({
         };
     },
 
-    resetGame: (state) => {
+    resetGame: (state, payload) => {
+      state.wordDate = payload.payload;
       state.grid = Array(6)
         .fill(null)
         .map(() => Array(5).fill({ value: "" }));
@@ -81,11 +79,6 @@ const gameSlice = createSlice({
   },
 });
 
-export const {
-  updateWordDate,
-  setLetterInput,
-  removeLetter,
-  updateGrid,
-  resetGame,
-} = gameSlice.actions;
+export const { setLetterInput, removeLetter, updateGrid, resetGame } =
+  gameSlice.actions;
 export default gameSlice.reducer;

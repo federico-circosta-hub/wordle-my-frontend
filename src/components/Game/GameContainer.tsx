@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import GameGrid from "./GameGrid";
 import GameKeyword from "./KeywordComponent/GameKeyword";
 import { useDispatch, useSelector } from "react-redux";
-import { resetGame, updateWordDate } from "../../redux/gameSlice";
+import { resetGame } from "../../redux/gameSlice";
 import { format } from "date-fns";
 import GameOverModal from "./GameOverModal";
 import { useGetWordInfoQuery } from "../../redux/api";
@@ -18,8 +18,7 @@ const GameContainer = () => {
     if (dateFromServer) {
       const newDate = new Date(dateFromServer);
       if (newDate > new Date(savedWordDate)) {
-        dispatch(resetGame());
-        dispatch(updateWordDate(format(newDate, "Y-MM-dd")));
+        dispatch(resetGame(format(newDate, "Y-MM-dd")));
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

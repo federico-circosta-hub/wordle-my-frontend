@@ -24,6 +24,7 @@ const GameOverModal = () => {
   const { isGameOver, isPositive } = useSelector(
     (state: any) => state.game.gameOver
   );
+  //const savedData = useSelector((state: any) => state.game);
 
   const [countdownTimer, setCountdownTimer] = useState<string>("");
   const [wordOfTheDay, setWordOfTheDay] = useState<string>("");
@@ -50,6 +51,13 @@ const GameOverModal = () => {
         {isPositive ? "Hai vinto!" : "Questa volta non hai indovinato!"}
       </DialogTitle>
       <DialogContent dividers>
+        {/*         {"wordDate " + savedData.wordDate + ";\n"}
+        {"grid " + savedData.grid[0][0].value + ";\n"}
+        {"attempt " + savedData.attempt + ";\n"}
+        {"gameOver " +
+          savedData.gameOver.isGameOver +
+          " " +
+          savedData.gameOver.isPositive} */}
         <Typography gutterBottom variant="h5">
           La parola di oggi è:
         </Typography>

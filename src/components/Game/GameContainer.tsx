@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import GameGrid from "./GameGrid";
 import GameKeyword from "./KeywordComponent/GameKeyword";
 import { useDispatch, useSelector } from "react-redux";

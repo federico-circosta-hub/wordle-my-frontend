@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import GameGrid from "./GameGrid";
 import GameKeyword from "./KeywordComponent/GameKeyword";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,13 +13,21 @@ const GameContainer = () => {
   const savedWordDate = useSelector((state: any) => state.game.wordDate);
   const { isGameOver } = useSelector((state: any) => state.game.gameOver);
 
-  const { data: dateFromServer } = useGetWordInfoQuery(undefined);
-  console.log("dateFromServer", dateFromServer);
+  const { data: dateFromServerString } = useGetWordInfoQuery(undefined);
+  const [dateFromServer, setDateFromServer] = useState<Date | undefined>();
+
+  useEffect(() => {
+    if (dateFromServerString) {
+      const newDate = new Date(dateFromServerString);
+      setDateFromServer(new Date(newDate));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dateFromServerString]);
+
   useEffect(() => {
     if (dateFromServer && savedWordDate) {
-      const newDate = new Date(dateFromServer);
-      if (newDate > new Date(savedWordDate)) {
-        dispatch(resetGame(format(newDate, "Y-MM-dd")));
+      if (dateFromServer > new Date(savedWordDate)) {
+        dispatch(resetGame(format(dateFromServer, "Y-MM-dd")));
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,7 +48,13 @@ const GameContainer = () => {
     <>
       <GameGrid />
       <GameKeyword />
-      {isGameOver && <GameOverModal />}
+      {isGameOver && (
+        <GameOverModal
+          data={
+            dateFromServer.toString() + " " + new Date(savedWordDate).toString()
+          }
+        />
+      )}
     </>
   );
 };

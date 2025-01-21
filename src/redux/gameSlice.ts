@@ -68,13 +68,13 @@ const gameSlice = createSlice({
     },
 
     resetGame: (state, payload) => {
-      state.wordDate = payload.payload;
       state.grid = Array(6)
         .fill(null)
         .map(() => Array(5).fill({ value: "" }));
       state.attempt = 0;
       state.letterStatus = {};
       state.gameOver = { isGameOver: false, isPositive: false };
+      state.wordDate = payload.payload;
     },
   },
 });

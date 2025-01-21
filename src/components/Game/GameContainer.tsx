@@ -6,6 +6,7 @@ import { resetGame } from "../../redux/gameSlice";
 import { format } from "date-fns";
 import GameOverModal from "./GameOverModal";
 import { useGetWordInfoQuery } from "../../redux/api";
+import { Box, LinearProgress } from "@mui/material";
 
 const GameContainer = () => {
   const dispatch = useDispatch();
@@ -13,9 +14,9 @@ const GameContainer = () => {
   const { isGameOver } = useSelector((state: any) => state.game.gameOver);
 
   const { data: dateFromServer } = useGetWordInfoQuery(undefined);
-
+  console.log("dateFromServer", dateFromServer);
   useEffect(() => {
-    if (dateFromServer) {
+    if (dateFromServer && savedWordDate) {
       const newDate = new Date(dateFromServer);
       if (newDate > new Date(savedWordDate)) {
         dispatch(resetGame(format(newDate, "Y-MM-dd")));
@@ -23,6 +24,17 @@ const GameContainer = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateFromServer]);
+
+  if (!dateFromServer)
+    return (
+      <Box
+        sx={{
+          width: "40%",
+        }}
+      >
+        <LinearProgress />
+      </Box>
+    );
 
   return (
     <>

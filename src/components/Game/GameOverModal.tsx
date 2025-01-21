@@ -62,8 +62,9 @@ const GameOverModal = () => {
           La parola di oggi è:
         </Typography>
         <div className="w-full flex gap-1">
-          {wordOfTheDay.split("").map((e: string) => (
+          {wordOfTheDay.split("").map((e: string, index: number) => (
             <div
+              key={`word-of-the-day-letter-${index}`}
               className={`w-8 flex items-center justify-center aspect-square uppercase rounded-md bg-green-600 border-green-700 text-white`}
             >
               {e}

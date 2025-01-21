@@ -19,7 +19,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-const GameOverModal = ({ data }) => {
+const GameOverModal = () => {
   const secretKey = process.env.REACT_APP_SECRET_KEY || "";
   const { isGameOver, isPositive } = useSelector(
     (state: any) => state.game.gameOver
@@ -51,7 +51,6 @@ const GameOverModal = ({ data }) => {
         {isPositive ? "Hai vinto!" : "Questa volta non hai indovinato!"}
       </DialogTitle>
       <DialogContent dividers>
-        {data}
         <Typography gutterBottom variant="h5">
           La parola di oggi è:
         </Typography>

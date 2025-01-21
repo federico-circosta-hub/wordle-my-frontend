@@ -13,20 +13,14 @@ const GameContainer = () => {
   const savedWordDate = useSelector((state: any) => state.game.wordDate);
   const { isGameOver } = useSelector((state: any) => state.game.gameOver);
 
-  const { data: dateFromServerString } = useGetWordInfoQuery(undefined);
-  const [dateFromServer, setDateFromServer] = useState<Date | undefined>();
-
-  useEffect(() => {
-    if (dateFromServerString) {
-      const newDate = new Date(dateFromServerString);
-      setDateFromServer(new Date(newDate));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateFromServerString]);
+  const { data: dateFromServer } = useGetWordInfoQuery(undefined);
 
   useEffect(() => {
     if (dateFromServer && savedWordDate) {
-      if (dateFromServer > new Date(savedWordDate)) {
+      if (
+        new Date(dateFromServer) > new Date(savedWordDate) ||
+        new Date(dateFromServer) < new Date(savedWordDate)
+      ) {
         dispatch(resetGame(format(dateFromServer, "Y-MM-dd")));
       }
     }
@@ -48,13 +42,7 @@ const GameContainer = () => {
     <>
       <GameGrid />
       <GameKeyword />
-      {isGameOver && (
-        <GameOverModal
-          data={
-            dateFromServer.toString() + " " + new Date(savedWordDate).toString()
-          }
-        />
-      )}
+      {isGameOver && <GameOverModal />}
     </>
   );
 };
